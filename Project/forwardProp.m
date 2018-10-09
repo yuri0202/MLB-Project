@@ -1,4 +1,4 @@
-function [ outputs, A ] = forwardPropagation( net, input )
+function [ outputs, A ] = forwardProp( net, input )
 %FORWARDPROPAGATION Computes the forward propagation on net with the given input
 %   INPUT:
 %   - net is the neural network to use
