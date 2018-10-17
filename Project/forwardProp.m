@@ -1,31 +1,35 @@
 function [ outputs, A ] = forwardProp( net, input )
-%FORWARDPROPAGATION Computes the forward propagation on net with the given input
+
+% Questa funzione simula la propagazione in avanti degli input specificati
+% su una rete neurale
+%
 %   INPUT:
-%   - net is the neural network to use
-%   - input is a matrix of N rows where each row is an input for the neural 
-%     network
+%   - 'net':  La rete neurale da utilizzare per la propagazione
+%   - 'input': Matrice di dimensione N x d, con N numero di input da dare
+%   alla rete, e d è la dimensione dell'input
+%
 %   OUTPUT:
-%   - outputs is a cell array where the i-th cell contains the output of 
-%     the i-th hidden layer. The last cell contains the output of the 
-%     output layer.
-%   - A is a cell array containing the input of each node of the i-th layer
-%     for each of the N samples.
+%   - 'outputs': Un array dove l'i-esima cella contiene l'output
+%   dell'i-esimo hidden layer. L'ultima cella contiene l'output dello
+%   strato di output
+%   - 'A': Un array che contiene l'input di ogni nodo dell'i-esimo strato
+%   per ognuno degli N nodi di input
 
 
-    %if there's a mismatch between the input and the network's inputDimesion
+    %Controllo se vi è mismatch tra l'input e il parametro inputDimension della rete
     if(net.inputDimension ~= size(input,2))
         error('forwardPropagation: Input size error.\nInput dimension was %d. Expected dimension: %d.',size(input,2),net.inputDimension);
     end
     
-    %we need to propagate the input forward through each layer
+    %Propagiamo l'input in avanti attraverso ognuno degli strati
     layerInput = input;
-    outputs = cell(net.hiddenLayersNum + 1, 1); %preallocating outputs
-    A = cell(net.hiddenLayersNum + 1, 1); %preallocating A for speed
+    outputs = cell(net.hiddenLayersNum + 1, 1); 
+    A = cell(net.hiddenLayersNum + 1, 1); 
     for i=1 : net.hiddenLayersNum + 1 
         A{i} = (net.W{i} * layerInput')';
         B = repmat(net.b{i},size(layerInput,1),1);
         outputs{i} = net.outputFunctions{i}(A{i}+B);
-        layerInput = outputs{i}; %the current output will be the input for the next propagation
+        layerInput = outputs{i}; %L'output sarà l'input per la prossima propagazione
     end
 end
 
