@@ -18,7 +18,7 @@ function [ outputs, A ] = forwardProp( net, input )
 
     %Controllo se vi è mismatch tra l'input e il parametro inputDimension della rete
     if(net.inputDimension ~= size(input,2))
-        error('forwardPropagation: Input size error.\nInput dimension was %d. Expected dimension: %d.',size(input,2),net.inputDimension);
+        error('forwardPropagation: Errore sulla dimensione dell''input. L''input ha dimensione %d e la dimensione prevista è %d.',size(input,2),net.inputDimension);
     end
     
     %Propagiamo l'input in avanti attraverso ognuno degli strati
