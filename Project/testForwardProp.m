@@ -3,7 +3,7 @@
 % Creo la rete neurale
 net = createNeuralNetwork(2, 1, @identity, @derivativeIdentity, [
     struct('size',2,'function',@sigmoid,'derivative',@derivativeSigmoid) % Hidden Layer
-],@derivativeSumOfSquares, 0.05);
+],@derivativeSumOfSquares);
 
 
 disp('Pesi W1');
