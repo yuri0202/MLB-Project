@@ -1,8 +1,8 @@
 % Script per testare la forward propagation
 
 % Creo la rete neurale
-net = createNeuralNetwork(2, 1, @identity, @derivativeIdentity, [
-    struct('size',2,'function',@sigmoid,'derivative',@derivativeSigmoid) % Hidden Layer
+net = createNeuralNetwork(2, 1, @identity, @identityDx, [
+    struct('size',2,'function',@sigmoid,'derivative',@sigmoidDx) % Hidden Layer
 ],@derivativeSumOfSquares);
 
 
