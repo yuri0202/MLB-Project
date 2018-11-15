@@ -1,4 +1,5 @@
-function [ y ] = sumOfSquaresDx( output, target )
-% Calcola la derivata della funzione somma dei quadrati sull'input output e target
-    y = output-target;
+function [ y ] = sumOfSquaresDx(X, Y )
+% Calcola la derivata della funzione somma dei quadrati sugli input
+% 'X' e 'Y'
+    y = X-Y;
 end
