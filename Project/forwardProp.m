@@ -4,16 +4,16 @@ function [ outputs, A ] = forwardProp( net, input )
 % su una rete neurale
 %
 %   INPUT:
-%   - 'net':  La rete neurale da utilizzare per la propagazione
-%   - 'input': Matrice di dimensione N x d, con N numero di input da dare
+%       - 'net':  La rete neurale da utilizzare per la propagazione
+%       - 'input': Matrice di dimensione N x d, con N numero di input da dare
 %   alla rete, e d è la dimensionalità dell'input
 %
 %   OUTPUT:
-%   - 'outputs': Un cell array dove l'i-esima cella contiene l'output
-%   dell'i-esimo hidden layer. L'ultima cella contiene l'output dello
-%   strato di output
-%   - 'A': Un array che contiene l'input di ogni nodo dell'i-esimo strato
-%   per ognuno degli N input dati alla rete
+%       - 'outputs': Un cell array dove l'i-esima cella contiene l'output
+%           dell'i-esimo hidden layer. L'ultima cella contiene l'output dello
+%           strato di output
+%       - 'A': Un array che contiene l'input di ogni nodo dell'i-esimo strato
+%            per ognuno degli N input dati alla rete
 
 
     %Controllo se vi è mismatch tra l'input e il parametro inputDimension della rete
