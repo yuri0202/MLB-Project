@@ -76,7 +76,7 @@ function [ neuralNetwork ] = createNeuralNetwork( inputDimension, outputDimensio
     % derivata
     i = length(hiddenLayers) + 1;   
     neuralNetwork.W{i} = rand(outputDimension, hiddenLayers(i-1).size)-0.5;
-    neuralNetwork.b{i} = rand(outputDimension, outputDimension)-0.5;
+    neuralNetwork.b{i} = rand(1, outputDimension)-0.5;
     neuralNetwork.outputFunctions{i} = outputFunction;
     neuralNetwork.derivativeFunctions{i} = outputDerivative;
     
