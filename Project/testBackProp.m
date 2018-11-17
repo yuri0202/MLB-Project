@@ -1,10 +1,8 @@
 % Script per testare la forward propagation
 
 % Creo la rete neurale
-net = createNeuralNetwork(5, 1, @sigmoid, @sigmoidDx, [
-    struct('size',5,'function',@sigmoid,'derivative',@sigmoidDx) % Hidden Layer
-    struct('size',5,'function',@sigmoid,'derivative',@sigmoidDx)
-    struct('size',5,'function',@identity,'derivative',@identityDx)
+net = createNeuralNetwork(2, 1, @identity, @identityDx, [
+    struct('size',7,'function',@sigmoid,'derivative',@sigmoidDx) % Hidden Layer
 ]);
 
 
@@ -17,7 +15,9 @@ disp(net.W{2});
 disp('Bias output');
 disp(net.b{2});
 
-[outputs, A] = forwardProp(net, [1,2,3,4,5], false);
+input = [1,2;1,5;3,4];
+target = [1;2;1];
+[outputs, A] = forwardProp(net, input, true);
 
 disp('A strato interno');
 disp(A{1});
@@ -28,5 +28,5 @@ disp(outputs{1});
 disp('Y');
 disp(outputs{2});
 
-disp('fine');
+[dw,db] = backProp(net,input,outputs,A,target,@crossEntropyDx);
 

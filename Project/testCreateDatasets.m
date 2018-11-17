@@ -5,7 +5,14 @@ TRAINING_SET_SIZE = 100;
 VALIDATION_SET_SIZE = 100; 
 TEST_SET_SIZE = 100;
 [trainingSetData, trainingSetLabels, validationSetData, validationSetLabels, testSetData, testSetLabels] = createSets(trainImages', trainLabels, testImages', testLabels, TRAINING_SET_SIZE, VALIDATION_SET_SIZE, TEST_SET_SIZE);
-testSetData = testSetData';
 
-display_network(testSetData(:,1:100)); % Show the first 100 images
-disp(testSetLabels(1:10));
+
+
+
+net = createNeuralNetwork(size(trainingSetData,2), 10, @identity, @identityDx, [
+    struct('size',320,'function',@sigmoid,'derivative',@sigmoidDx) % Hidden Layer
+]);
+
+[outputs, A] = forwardProp(net, trainingSetData, false);
+
+[dW, db] = backProp(net,trainingSetData, outputs,A,trainingSetLabels, @crossEntropyDx);
