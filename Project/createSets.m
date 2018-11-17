@@ -31,21 +31,29 @@ function[trainingSetData, trainingSetLabels, validationSetData, validationSetLab
 %   - 'trainingSetData': Matrice di dimensione [trainingSetSize]x784 che
 %                        contiene l'insieme di immagini distinte e casuali
 %                        che sono state estratte da trainImages
-%   - 'trainingSetlabels': Matrice di dimensione [trainingSetSize]x1 che
+%   - 'trainingSetlabels': Matrice di dimensione [trainingSetSize]x10 che
 %                          rappresenta le labels delle immagini in
-%                          'trainingSetData'
+%                          'trainingSetData'. (La i-esima riga avrà tutti 0
+%                          tranne un 1 in corrispondenza della label
+%                          relativa all'immagine i-esima di
+%                          trainingSetData)
 %   - 'validationSetData': Matrice di dimensione [validationSetSize]x784 che
 %                          contiene l'insieme di immagini distinte e casuali
 %                          che sono state estratte da trainImages
-%   - 'validationSetlabels': Matrice di dimensione [validationSetSize]x1 che
+%   - 'validationSetlabels': Matrice di dimensione [validationSetSize]x10 che
 %                            rappresenta le labels delle immagini in
-%                            'validationSetData'
+%                            'validationSetData'. (La i-esima riga avrà 
+%                            tutti 0 tranne un 1 in corrispondenza della
+%                            label relativa all'immagine i-esima di
+%                            'validationSetData')
 %   - 'testSetData': Matrice di dimensione [testetSize]x784 che
 %                    contiene l'insieme di immagini distinte e casuali
 %                    che sono state estratte da testImages
-%   - 'testSetlabels': Matrice di dimensione [testSetSize]x1 che
+%   - 'testSetlabels': Matrice di dimensione [testSetSize]x10 che
 %                      rappresenta le labels delle immagini in
-%                      'testSetData'
+%                      'testSetData'. (La i-esima riga avrà tutti 0 tranne
+%                      un 1 in corrispondenza della label relativa
+%                      all'immagine i-esima di 'testSetData')
 
 
     % Controllo sulle dimensioni dei set dati in input, se una dimensione
@@ -101,7 +109,7 @@ function [setData, setLabels, indexesTaken, lastPosition] = buildSet(digits, lab
     % Matrice delle immagini
     setData = zeros(setSize, 784);
     % Matrice delle labels
-    setLabels = zeros(1, setSize);
+    setLabels = zeros(setSize, 10);
     % Numero di immagini da estrarre per ogni cifra
     elemsForDigits = setSize/10;
     % Array che tiene traccia del numero di immagini inserite per ogni
@@ -123,7 +131,7 @@ function [setData, setLabels, indexesTaken, lastPosition] = buildSet(digits, lab
                 % Incremento il numero di immagini aggiunte per la cira corrente
                 digitsCounter(currentDigit+1) = digitsCounter(currentDigit+1) + 1;
                 % Aggiungo la label e l'immagine alle matrici di output
-                setLabels(j) = currentDigit;
+                setLabels(j, currentDigit+1) = 1;
                 setData(j, :) = digits(randomIndex, :);
                 
                 % Aggiungi questo indice a quelli gia' inseriti
