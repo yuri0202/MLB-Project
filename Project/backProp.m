@@ -1,14 +1,15 @@
-function [derivativeWeights, derivativeBiases] = backProp(net, input, outputs, A, target)
+function [derivativeWeights, derivativeBiases] = backProp(net, input, outputs, A, target, errorFunction)
 %BACKPROP Esegue la back-propagation sulla rete
 %   INPUT:
-%       - net: la rete neurale che verrà utilizzata.
-%       - input: matrice (N x d) con N numero di campioni e
+%       - 'net': la rete neurale che verrà utilizzata.
+%       - 'input': matrice (N x d) con N numero di campioni e
 %         d numero di componenti.
-%       - outputs: cell array prodotto in output dalla funzione di 
+%       - 'outputs': cell array prodotto in output dalla funzione di 
 %         forward propagation.
-%       - A: cell array di nodi di input prodotto dalla funzione di 
+%       - 'A': cell array di nodi di input prodotto dalla funzione di 
 %         forward propagation.
-%       - target: target per l'input dato.
+%       - 'target': target per l'input dato.
+%       - 'errorFunction': Funzione da utilizzare per il calcolo dell'errore
 %
 %   OUTPUT:
 %       - derivativeWeights: cell array contenente le derivate dei pesi per
@@ -18,7 +19,7 @@ function [derivativeWeights, derivativeBiases] = backProp(net, input, outputs, A
     
     %calcola i delta dei nodi di output
     layer = net.hiddenLayersNum+1;
-    delta{layer} = net.errorFunctionDerivative(outputs{layer}, target) .* net.derivativeFunctions{layer}(A{layer});
+    delta{layer} = errorFunction(outputs{layer}, target) .* net.derivativeFunctions{layer}(A{layer});
 
     %calcola i delta rimanenti "all'indietro"
     for i=layer-1:-1:1
