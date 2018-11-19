@@ -32,6 +32,7 @@ function [ outputs, A ] = forwardProp( net, input, softMax )
         % Applica il soft-max all'output della rete.
         softmax = exp(outputs{net.hiddenLayersNum + 1}) ./ sum(exp(outputs{net.hiddenLayersNum + 1}), 2);
         outputs{net.hiddenLayersNum + 1} = softmax;
+    end
         
         
 end
