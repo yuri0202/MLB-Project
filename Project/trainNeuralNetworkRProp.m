@@ -87,7 +87,9 @@ function [net,TSErrors, VSErrors] = trainNeuralNetworkRProp(net, trainingSetInpu
     
     % Inizia l'addestramento della rete per ogni epoca
     for epoch = 1 : epochs
-        fprintf('EPOCH %d.\n',epoch);
+        if (printFlag)
+            fprintf('EPOCH %d.\n',epoch);
+        end
         % Salvo la rete prima di effettuare l'aggiornamento
         prevNet = net;
         
@@ -128,5 +130,5 @@ function [net,TSErrors, VSErrors] = trainNeuralNetworkRProp(net, trainingSetInpu
     
     % Recupero la rete che ha registrato l'errore minimo sul Validation Set
     net = bestNet;  
-    fprintf('Miglior errore vs : %d\n',bestVSError);
+    %fprintf('Miglior errore vs : %d\n',bestVSError);
 end
