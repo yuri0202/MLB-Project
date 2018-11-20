@@ -1,4 +1,4 @@
-function [ neuralNetwork ] = createNeuralNetwork( inputDimension, outputDimension, outputFunction, outputDerivative, hiddenLayers )
+function [ neuralNetwork ] = createNeuralNetwork( inputDimension, outputDimension, outputFunction, outputDerivative, hiddenLayers,infWeights, supWeights )
 % La funzione crea una rete neurale feed-forward multistrato
 %
 %   INPUT:
@@ -13,6 +13,10 @@ function [ neuralNetwork ] = createNeuralNetwork( inputDimension, outputDimensio
 %                         - outputFunction: Funzione di attivazione
 %                         - derivative: La derivata della funzione di
 %                         attivazione
+%       - 'infWeights': Estremo inferiore dell'intervallo dei valori con cui
+%                       riempire casualmente i pesi della rete.
+%       - 'supWeights': Estremo superiore dell'intervallo dei valori con cui
+%                       riempire casualmente i pesi della rete.
 %
 %   OUTPUT:
 %       - 'neuralNetwork': Rete Neurale costituita dai seguenti campi:
@@ -54,8 +58,8 @@ function [ neuralNetwork ] = createNeuralNetwork( inputDimension, outputDimensio
     
     % Generazione di pesi e bias tra lo strato di input e il primo hidden
     % layer e assegnazione delle funzioni di attivazione e della sua derivata
-    neuralNetwork.W{1} = rand(hiddenLayers(1).size, inputDimension)-0.5;
-    neuralNetwork.b{1} = rand(1, hiddenLayers(1).size)-0.5;
+    neuralNetwork.W{1} = (supWeights-infWeights) .* rand(hiddenLayers(1).size, inputDimension) +infWeights;
+    neuralNetwork.b{1} = (supWeights-infWeights) .* rand(1, hiddenLayers(1).size) +infWeights;
     neuralNetwork.outputFunctions{1} = hiddenLayers(1).function;
     neuralNetwork.derivativeFunctions{1} = hiddenLayers(1).derivative;
     
@@ -64,8 +68,8 @@ function [ neuralNetwork ] = createNeuralNetwork( inputDimension, outputDimensio
     % e la derivata per ogni hidden layer.
     if(size(hiddenLayers,2)>1)
         for i = 2 : size(hiddenLayers,2)
-            neuralNetwork.W{i} = rand(hiddenLayers(i).size, hiddenLayers(i-1).size);
-            neuralNetwork.b{i} = rand(1, hiddenLayers(i).size);
+            neuralNetwork.W{i} = (supWeights-infWeights) .* rand(hiddenLayers(i).size, hiddenLayers(i-1).size) + infWeights;
+            neuralNetwork.b{i} = (supWeights-infWeights) .* rand(1, hiddenLayers(i).size) + infWeights;
             neuralNetwork.outputFunctions{i} = hiddenLayers(i).function;
             neuralNetwork.derivativeFunctions{i} = hiddenLayers(i).derivative;
         end
@@ -75,8 +79,8 @@ function [ neuralNetwork ] = createNeuralNetwork( inputDimension, outputDimensio
     % output e assegnazione delle funzioni di attivazione e della sua
     % derivata
     i = length(hiddenLayers) + 1;   
-    neuralNetwork.W{i} = rand(outputDimension, hiddenLayers(i-1).size)-0.5;
-    neuralNetwork.b{i} = rand(1, outputDimension)-0.5;
+    neuralNetwork.W{i} = (supWeights-infWeights) .* rand(outputDimension, hiddenLayers(i-1).size) + infWeights;
+    neuralNetwork.b{i} = (supWeights-infWeights) .* rand(1, outputDimension) + infWeights;
     neuralNetwork.outputFunctions{i} = outputFunction;
     neuralNetwork.derivativeFunctions{i} = outputDerivative;
     
