@@ -56,6 +56,8 @@ function [meanStdPerComb] = modelHyperParametersOptimization(trainImages,trainLa
     % Estraggo elementi random e distinti dal training set MNIST
     [trainingSetData, trainingSetLabels, ~, ~, ~, ~] = createSets(trainImages', trainLabels, trainImages', trainLabels, trainingSetSize, 0, 0);
     %trainingSetData = [1 1 1 1 1 1 1 1 1 1; 2 2 2 2 2 2 2 2 2 2; 3 3 3 3 3 3 3 3 3 3; 4 4 4 4 4 4 4 4 4 4; 5 5 5 5 5 5 5 5 5 5; 6 6 6 6 6 6 6 6 6 6; 7 7 7 7 7 7 7 7 7 7; 8 8 8 8 8 8 8 8 8 8; 9 9 9 9 9 9 9 9 9 9; 10 10 10 10 10 10 10 10 10 10];
+    %trainingSetData = [1 1 1 1 1 1 1 1 1 1;1 1 1 1 1 1 1 1 1 1; 1 1 1 1 1 1 1 1 1 1; 2 2 2 2 2 2 2 2 2 2; 2 2 2 2 2 2 2 2 2 2; 2 2 2 2 2 2 2 2 2 2; 3 3 3 3 3 3 3 3 3 3; 3 3 3 3 3 3 3 3 3 3; 3 3 3 3 3 3 3 3 3 3];
+
     foldSize = trainingSetSize/K;
     
     % TODO
@@ -66,10 +68,12 @@ function [meanStdPerComb] = modelHyperParametersOptimization(trainImages,trainLa
     % avere 111,222,333 si avrà 123,123,123)
     
     % Effettuo una permutazione random degli elementi di trainingSetData e
-    % trainingSetLabels
-    shuffle   = randperm(trainingSetSize);
-    trainingSetData   = trainingSetData(shuffle,:);
-    trainingSetLabels = trainingSetLabels(shuffle,:);
+    % trainingSetLabels, poichè restituiti in ordine di digits
+    %shuffle   = randperm(trainingSetSize);
+    %trainingSetData   = trainingSetData(shuffle,:);
+    %trainingSetLabels = trainingSetLabels(shuffle,:);
+    
+    [trainingSetData, trainingSetLabels] = balanceDataSets(trainingSetData, trainingSetLabels);
     
 
     
@@ -107,6 +111,26 @@ function [meanStdPerComb] = modelHyperParametersOptimization(trainImages,trainLa
             end
         end
     end  
+end
+
+
+function [trainingSetDataBalanced, trainingSetLabelsBalanced] = balanceDataSets (trainingSetData,trainingSetLabels)
+    digits = size(trainingSetLabels,2);
+    digitsOcc = size(trainingSetData,1) / digits;
+    trainingSetDataBalanced = zeros(size(trainingSetData,1),size(trainingSetData,2));
+    j = 1;
+    i = 1;
+    while i < digitsOcc + 1
+        t = i;
+        while t < size(trainingSetData,1) + 1
+            trainingSetDataBalanced(j,:) = trainingSetData(t,:);
+            trainingSetLabelsBalanced(j,:) = trainingSetLabels(t,:);
+            t = t + digitsOcc;
+            j = j + 1;
+        end
+     i = i+1;
+    end
+   
 end
 
 

@@ -85,7 +85,7 @@ function [net,TSE, VSE, deltaB, deltaW, trainingDerivB, trainingDerivW] = resili
     % bias con uno scostamento.
     for l = 1 : net.hiddenLayersNum+1
             % Il delta della prima epoca coincide con quello utilizzato
-            % nell'algoritmodella discesa del gradiente.
+            % nell'algoritmo della discesa del gradiente.
             % Abbiamo scelto empiricamente eta = 0.000001
         if epoch == 1
 
