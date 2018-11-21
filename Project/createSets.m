@@ -8,9 +8,7 @@ function[trainingSetData, trainingSetLabels, validationSetData, validationSetLab
 % forniti in input. Al fine di avere un numero di immagini uguale per ogni
 % classe, le grandezze dei vari set dati in input dovranno essere
 % interi multipli di 10, altrimenti la funzione lancerà un errore.
-% Inoltre, si avrà che la label setLabel(i) corrisponde all'immagine
-% setData(i,:).
-%
+
 % INPUT:
 %   - 'trainImages': Matrice di immagini dal training set di MNIST
 %                    (60000x784), ottenuta dalla funzione 'loadMNIST'
