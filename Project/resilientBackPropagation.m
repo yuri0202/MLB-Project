@@ -110,6 +110,7 @@ function [net,TSE, VSE, deltaB, deltaW, trainingDerivB, trainingDerivW] = resili
             % Se i pesi e i bias hanno derivate concordi, gli scostamenti dell'epoca
             % precedente vengono incrementati con il valore 'etaPlus'
             deltaW{l}(concordanceW > 0) = deltaWPrec{l}(concordanceW > 0) * etaPlus;
+
             deltaB{l}(concordanceB > 0) = deltaBPrec{l}(concordanceB > 0) * etaPlus;
             
             
@@ -118,6 +119,12 @@ function [net,TSE, VSE, deltaB, deltaW, trainingDerivB, trainingDerivW] = resili
             % 'etaMinus' cambiato di segno
             deltaW{l}(concordanceW < 0) = deltaWPrec{l}(concordanceW < 0) * (-etaMinus);
             deltaB{l}(concordanceB < 0) = deltaBPrec{l}(concordanceB < 0) * (-etaMinus);
+            
+            % Se la moltiplicazione tra derivata precedente e derivata
+            % corrente è pari a 0, allora il valore del nuovo delta è
+            % uguale a quello precedente
+            deltaW{l}(concordanceW==0) = deltaWPrec{l}(concordanceW==0);
+            deltaB{l}(concordanceB==0) = deltaBPrec{l}(concordanceB==0);
         end
         
         % Aggiorno pesi e bias usando gli scostamenti

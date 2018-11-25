@@ -1,11 +1,11 @@
 % Script per testare la forward propagation
-
+SUP_WEIGHTS = 0.09;
+INF_WEIGHTS = -0.09;
 % Creo la rete neurale
-net = createNeuralNetwork(5, 1, @sigmoid, @sigmoidDx, [
+net = createNeuralNetwork(3, 1, @sigmoid, @sigmoidDx, [
     struct('size',5,'function',@sigmoid,'derivative',@sigmoidDx) % Hidden Layer
     struct('size',5,'function',@sigmoid,'derivative',@sigmoidDx)
-    struct('size',5,'function',@identity,'derivative',@identityDx)
-]);
+],INF_WEIGHTS,SUP_WEIGHTS );
 
 
 disp('Pesi W1');
