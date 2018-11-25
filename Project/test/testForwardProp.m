@@ -1,32 +1,23 @@
 % Script per testare la forward propagation
+
+% Scelta dei parametri per la rete neurale
 SUP_WEIGHTS = 0.09;
 INF_WEIGHTS = -0.09;
+OUTPUT_ACTIVATION_FUNCTION = @identity;
+OUTPUT_ACTIVATION_FUNCTION_DX =@identityDx;
+HIDDEN_ACTIVATION_FUNCTION = @sigmoid;
+HIDDEN_ACTIVATION_FUNCTION_DX = @sigmoidDx;
+INPUT_DIMENSION = 4;
+OUTPUT_DIMENSION = 2;
 % Creo la rete neurale
-net = createNeuralNetwork(3, 1, @sigmoid, @sigmoidDx, [
-    struct('size',5,'function',@sigmoid,'derivative',@sigmoidDx) % Hidden Layer
-    struct('size',5,'function',@sigmoid,'derivative',@sigmoidDx)
+net = createNeuralNetwork(INPUT_DIMENSION, OUTPUT_DIMENSION, OUTPUT_ACTIVATION_FUNCTION, OUTPUT_ACTIVATION_FUNCTION_DX, [
+    struct('size',3,'function',HIDDEN_ACTIVATION_FUNCTION,'derivative',HIDDEN_ACTIVATION_FUNCTION_DX) % Hidden Layer1
+    struct('size',2,'function',HIDDEN_ACTIVATION_FUNCTION,'derivative',HIDDEN_ACTIVATION_FUNCTION_DX) % Hidden Layer2
 ],INF_WEIGHTS,SUP_WEIGHTS );
 
 
-disp('Pesi W1');
-disp(net.W{1});
-disp('Bias liv. 1');
-disp(net.b{1});
-disp('Pesi W2');
-disp(net.W{2});
-disp('Bias output');
-disp(net.b{2});
+[outputs, A] = forwardProp(net, [1,2,3,4], false);
 
-[outputs, A] = forwardProp(net, [1,2,3,4,5], false);
 
-disp('A strato interno');
-disp(A{1});
-disp('A output');
-disp(A{2});
-disp('Z1');
-disp(outputs{1});
-disp('Y');
-disp(outputs{2});
 
-disp('fine');
 
