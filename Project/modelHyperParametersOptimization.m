@@ -55,24 +55,10 @@ function [meanStdPerComb] = modelHyperParametersOptimization(trainImages,trainLa
     
     % Estraggo elementi random e distinti dal training set MNIST
     [trainingSetData, trainingSetLabels, ~, ~, ~, ~] = createSets(trainImages', trainLabels, trainImages', trainLabels, trainingSetSize, 0, 0);
-    %trainingSetData = [1 1 1 1 1 1 1 1 1 1; 2 2 2 2 2 2 2 2 2 2; 3 3 3 3 3 3 3 3 3 3; 4 4 4 4 4 4 4 4 4 4; 5 5 5 5 5 5 5 5 5 5; 6 6 6 6 6 6 6 6 6 6; 7 7 7 7 7 7 7 7 7 7; 8 8 8 8 8 8 8 8 8 8; 9 9 9 9 9 9 9 9 9 9; 10 10 10 10 10 10 10 10 10 10];
-    %trainingSetData = [1 1 1 1 1 1 1 1 1 1;1 1 1 1 1 1 1 1 1 1; 1 1 1 1 1 1 1 1 1 1; 2 2 2 2 2 2 2 2 2 2; 2 2 2 2 2 2 2 2 2 2; 2 2 2 2 2 2 2 2 2 2; 3 3 3 3 3 3 3 3 3 3; 3 3 3 3 3 3 3 3 3 3; 3 3 3 3 3 3 3 3 3 3];
 
     foldSize = trainingSetSize/K;
-    
-    % TODO
-    % PROBABILMENTE BISOGNA SHUFFLARE LE RIGHE DELLA MATRICE O SI AVRANNO
-    % RISULTATI MEH perchè la funzione createSets restituisce i valori in ordine di
-    % cifra (Alternativa è creare una funzione che prende in input
-    % trainingSetData e trainingSetLabels e bilancia il tutto (es. invece di
-    % avere 111,222,333 si avrà 123,123,123)
-    
-    % Effettuo una permutazione random degli elementi di trainingSetData e
-    % trainingSetLabels, poichè restituiti in ordine di digits
-    %shuffle   = randperm(trainingSetSize);
-    %trainingSetData   = trainingSetData(shuffle,:);
-    %trainingSetLabels = trainingSetLabels(shuffle,:);
-    
+     
+    % Mi assicuro che ogni fold abbia un numero bilanciato di digits
     [trainingSetData, trainingSetLabels] = balanceDataSets(trainingSetData, trainingSetLabels);
     
 
@@ -110,7 +96,10 @@ function [meanStdPerComb] = modelHyperParametersOptimization(trainImages,trainLa
                 meanStdCurrentIndex = meanStdCurrentIndex +1;
             end
         end
-    end  
+    end
+    % Calcolo la combinazione di parametri che ha una standard deviation
+    % minore tra le 5 che hanno una accuracy media migliore.
+    
 end
 
 
