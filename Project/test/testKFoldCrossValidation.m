@@ -21,10 +21,10 @@ ERROR_FUNCTION_DX = @crossEntropyDx;
 K = 10;
 SOFTMAX_FLAG = true;
 PRINT_FLAG = false;
-SET_SIZE_FOR_KFOLD = 10000;
-etaMins = [0.5];
-etaPlus = [1.1];
-numHiddenNodes = [200];
+SET_SIZE_FOR_KFOLD = 5000;
+etaMins = [0.4,0.5];
+etaPlus = [1.1,1.2];
+numHiddenNodes = [100,200];
 
 % Lancio l'algoritmo per la scelta dei migliori iper-parametri per tramite
 % la tecnica di k-fold cross validation
