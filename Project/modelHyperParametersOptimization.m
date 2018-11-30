@@ -1,10 +1,14 @@
-function [meanStdPerComb] = modelHyperParametersOptimization(trainImages,trainLabels,trainingSetSize,epochs,outputFunction,outputFunctionDx,hiddenFunction,hiddenFunctionDx,supWeights,infWeights,errorFunction,errorFuctionDx,softMax,K,etaMins,etaPlus,numHiddenNodes, printFlag)
+function [meanStdPerComb,bestNumNodes,bestEtaMin,bestEtaPlus] = modelHyperParametersOptimization(selectionCriterionFunction,trainImages,trainLabels,trainingSetSize,epochs,outputFunction,outputFunctionDx,hiddenFunction,hiddenFunctionDx,supWeights,infWeights,errorFunction,errorFuctionDx,softMax,K,etaMins,etaPlus,numHiddenNodes, printFlag)
 % Questa funzione trova la combinazione di parametri ottimi (etaMinus,
 % etaPlus e numero di nodi dello strato interno) per l'addestramento 
 % della rete, sfruttando la tecnica del K-Fold Cross Validation
 
 %
 % INPUT:
+%   - 'selectionCriterionFunction': Funzione che determina il criterio con
+%                                   il quale selezionare la combinazione 
+%                                   di paramaetri migliore dopo le
+%                                   iterazioni del K-Fold Cross Validation
 %   - 'trainImages': Matrice di immagini dal training set di MNIST
 %                    (60000x784), ottenuta dalla funzione 'loadMNIST'
 %   - 'trainLabels': Matrice di labels dal training set di MNIST (60000x1),
@@ -99,6 +103,8 @@ function [meanStdPerComb] = modelHyperParametersOptimization(trainImages,trainLa
     end
     % Calcolo la combinazione di parametri che ha una standard deviation
     % minore tra le 5 che hanno una accuracy media migliore.
+    [bestNumNodes,bestEtaMin,bestEtaPlus ] = selectionCriterionFunction(A, 10);
+    
     
 end
 
