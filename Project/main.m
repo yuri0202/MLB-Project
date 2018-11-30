@@ -32,7 +32,7 @@ numHiddenNodes = [200,400,600,800];
 % la tecnica di k-fold cross validation
 tic;
 [meanStdPerComb,bestNumNodes,bestEtaMin,bestEtaPlus] = modelHyperParametersOptimization(@topAvgConsideringStd,trainImages,trainLabels,SET_SIZE_FOR_KFOLD,EPOCHS,OUTPUT_ACTIVATION_FUNCTION, OUTPUT_ACTIVATION_FUNCTION_DX, HIDDEN_ACTIVATION_FUNCTION, HIDDEN_ACTIVATION_FUNCTION_DX, SUP_WEIGHTS, INF_WEIGHTS,ERROR_FUNCTION ,ERROR_FUNCTION_DX,SOFTMAX_FLAG,K,etaMins,etaPlus,numHiddenNodes,PRINT_FLAG);
-fprintf("\nTempo per l'esecuzione della K-Fold Cross Validation: %f ore \n", toc/3600);
+fprintf("\nTempo per l'esecuzione della K-Fold Cross Validation: %.0f minuti e %.0f secondi\n", floor(toc/60), (toc) - (floor(toc/60)*60));
 [trainingSetData, trainingSetLabels, validationSetData, validationSetLabels, testSetData, testSetLabels] = createSets(trainImages', trainLabels, testImages', testLabels, TRAINING_SET_SIZE, VALIDATION_SET_SIZE, TEST_SET_SIZE);
 
 %shuffle   = randperm(TRAINING_SET_SIZE);

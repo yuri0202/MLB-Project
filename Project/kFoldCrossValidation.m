@@ -101,7 +101,7 @@ function [Performances] = kFoldCrossValidation(trainingSetData, trainingSetLabel
         [totalAccuracy] = evaluateNetClassifier(output{net.hiddenLayersNum+1}, TeSLabels);
         totalAccuracy = totalAccuracy*100;
         Performances(k) = totalAccuracy;
-        fprintf("Accuracy della rete neurale - Itarazione kfold %d di %d: %.2f%%\n", k,K,totalAccuracy);
+        fprintf("Accuracy della rete neurale - Itarazione K-Fold %d di %d: %.2f%%\n", k,K,totalAccuracy);
 
         % Aggiorno gli indici per la prossima iterazione
         % Utilizzo la funzione realizzata myMod tale che dati

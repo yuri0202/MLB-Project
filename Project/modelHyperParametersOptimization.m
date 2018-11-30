@@ -103,7 +103,7 @@ function [meanStdPerComb,bestNumNodes,bestEtaMin,bestEtaPlus] = modelHyperParame
     end
     % Calcolo la combinazione di parametri che ha una standard deviation
     % minore tra le 5 che hanno una accuracy media migliore.
-    [bestNumNodes,bestEtaMin,bestEtaPlus ] = selectionCriterionFunction(A, 10);
+    [bestNumNodes,bestEtaMin,bestEtaPlus ] = selectionCriterionFunction(meanStdPerComb, 10);
     
     
 end
