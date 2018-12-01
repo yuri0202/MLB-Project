@@ -24,7 +24,6 @@ function [Performances] = kFoldCrossValidation(trainingSetData, trainingSetLabel
 %   - 'ETA_PLUS': Il valore di etaPlus per la
 %                  combinazione corrente di iper-parametri
 %   - 'epochs': Numero massimo di epoche con cui addestrare la rete
-
 %   - 'outputFunction': Funzione di attivazione dello strato di output
 %   - 'outputDerivative': Derivata della funzione di attivazione dello
 %                         strato di output

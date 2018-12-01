@@ -31,11 +31,12 @@ function [ neuralNetwork ] = createNeuralNetwork( inputDimension, outputDimensio
 %           - 'b': Array di matrici monodimensionali dove l'i-esimo
 %                  elemento rappresenta i valori dei bias del layer i
 %           - 'outputFunctions': Array tale per cui l'i-esimo elemento
-%                           rappresenta la funzione di attivazione del
-%                           layer i
+%                                rappresenta la funzione di attivazione del
+%                                layer i
+%                                
 %           - 'derivativeFunctions ': Array tale per cui l'i-esimo elemento
-%                           rappresenta la derivata della funzione di
-%                           attivazione del layer i
+%                                     rappresenta la derivata della
+%                                     funzione di attivazione del layer i
 
 
     % Controllo se gli elementi dell'array hiddenLayers sono rappresentati
@@ -63,12 +64,12 @@ function [ neuralNetwork ] = createNeuralNetwork( inputDimension, outputDimensio
     neuralNetwork.outputFunctions{1} = hiddenLayers(1).function;
     neuralNetwork.derivativeFunctions{1} = hiddenLayers(1).derivative;
     
-    % Se vi è più di un hidden layer, allora generare pesi e bias per le
+    % Se vi e' piu' di un hidden layer, allora generare pesi e bias per le
     % connessioni tra questi ultimi e assegnare le funzioni di attivazione
     % e la derivata per ogni hidden layer.
     if(size(hiddenLayers,2)>1)
         for i = 2 : size(hiddenLayers,2)
-            neuralNetwork.W{i} = (supWeights-infWeights) .* rand(hiddenLayers(i).size, hiddenLayers(i-1).size) + infWeights;
+            neuralNetwork.W{i} = (supWeights-infWeights) .* rand(hiddenLayers(i).size,hiddenLayers(i-1).size) + infWeights;
             neuralNetwork.b{i} = (supWeights-infWeights) .* rand(1, hiddenLayers(i).size) + infWeights;
             neuralNetwork.outputFunctions{i} = hiddenLayers(i).function;
             neuralNetwork.derivativeFunctions{i} = hiddenLayers(i).derivative;
