@@ -8,14 +8,14 @@ function [net,TSErrors, VSErrors] = trainNeuralNetworkRProp(net, trainingSetInpu
 %                         riga i-esima rappresenta l'i-esimo input per la
 %                         rete neurale
 %   - 'trainingSetLabels': Matrice che rappresenta il target da ottenere
-%                          rispetto ai valori di output generati dalla rete
-%                          neurale con in input il training set
+%                          rispetto ai valori di output generati dalla 
+%                          rete neurale con in input il training set
 %   - 'validationSetInput': Validation Set utilizzato per evitare
 %                           overfitting durante l'addestramento del
 %                           training set
 %   - 'validationSetLabels': Matrice che rappresenta il target da ottenere
-%                            rispetto ai valori di output generati dalla rete
-%                            neurale con in input il validation set
+%                            rispetto ai valori di output generati dalla 
+%                            rete neurale con in input il validation set
 %   - 'epochs': Numero massimo di epoche con cui addestrare la rete
 %   - 'errorFunction': Funzione da utilizzare per il calcolo dell'errore
 %   - 'errorFunctionDx': Derivata della funzione da utilizzare per il
@@ -109,9 +109,9 @@ function [net,TSErrors, VSErrors] = trainNeuralNetworkRProp(net, trainingSetInpu
             errorCount = 0;
             bestVSError = VSErrors(epoch);
             bestNet = prevNet;
-        else % Altrimenti, se è passato un numero minimo di epoche, incrementiamo
-             % il contatore e se abbiamo raggiunto il limite, fermiamo
-             % l'addestramento
+        else % Altrimenti, se è passato un numero minimo di epoche, 
+             % incrementiamoil contatore e se abbiamo raggiunto il limite, 
+             % fermiamo l'addestramento
              if epoch>=minEpochs
                  errorCount = errorCount+1;
                  if errorCount == 20
@@ -128,7 +128,7 @@ function [net,TSErrors, VSErrors] = trainNeuralNetworkRProp(net, trainingSetInpu
         VSErrors = VSErrors (1:epoch);
     end
     
-    % Recupero la rete che ha registrato l'errore minimo sul Validation Set
+    % Recupero la rete che ha registrato l'errore minimo sul 
+    % Validation Set
     net = bestNet;  
-    %fprintf('Miglior errore vs : %d\n',bestVSError);
 end

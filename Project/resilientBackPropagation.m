@@ -8,14 +8,15 @@ function [net,TSE, VSE, deltaB, deltaW, trainingDerivB, trainingDerivW] = resili
 %                         riga i-esima rappresenta l'i-esimo input per la
 %                         rete neurale
 %   - 'trainingSetLabels': Matrice che rappresenta il target da ottenere
-%                          rispetto ai valori di output generati dalla rete
-%                          neurale con in input il training set
+%                          rispetto ai valori di output generati dalla 
+%                          rete neurale con in input il training set
+%                          
 %   - 'validationSetInput': Validation Set utilizzato per evitare
 %                           overfitting durante l'addestramento del
 %                           training set
 %   - 'validationSetLabels': Matrice che rappresenta il target da ottenere
-%                            rispetto ai valori di output generati dalla rete
-%                            neurale con in input il validation set
+%                            rispetto ai valori di output generati dalla 
+%                            rete neurale con in input il validation set
 %   - 'errorFunction': Funzione da utilizzare per il calcolo dell'errore
 %   - 'errorFunctionDx': Derivata della funzione da utilizzare per il
 %                        calcolo dell'errore
@@ -39,7 +40,8 @@ function [net,TSE, VSE, deltaB, deltaW, trainingDerivB, trainingDerivW] = resili
 %   - 'deltaWPrec': Cell array che associa ad ogni strato di pesi, la
 %                   variazione effettuata sui pesi nell'epoca precedente
 %   - 'deltaBPrec': Cell array che associa ad ogni strato di nodi, la
-%                  variazione effettuata su ogni bias nell'epoca precedente
+%                   variazione effettuata su ogni bias nell'epoca 
+%                   precedente
 %   - 'softmax': Se uguale a TRUE, all'output della rete (dopo la forward
 %                propagation) verrà applicato il softmax; no altrimenti
 %   - 'printFlag': Se uguale a TRUE, verranno stampati a video i valori
@@ -50,10 +52,10 @@ function [net,TSE, VSE, deltaB, deltaW, trainingDerivB, trainingDerivW] = resili
 %   - 'net': Rete neurale addestrata sul training set
 %   - 'TSE': Errore sul training set all'epoca corrente
 %   - 'VSE': Errore sul validation set all'epoca corrente
-%   - 'deltaB': Cell array che associa ad ogni strato di nodi la variazione
-%               effettuata per ogni bias nell'epoca corrente
-%   - 'deltaW': Cell array che associa ad ogni strato di pesi la variazione
-%               effettuata per ogni peso nell'epoca corrente
+%   - 'deltaB': Cell array che associa ad ogni strato di nodi la 
+%               variazione effettuata per ogni bias nell'epoca corrente
+%   - 'deltaW': Cell array che associa ad ogni strato di pesi la 
+%               variazione effettuata per ogni peso nell'epoca corrente
 %   - 'trainingDerivB': Array cell che associa ad ogni layer di nodi la
 %                       derivata della funzione di errore calcolata
 %                       rispetto ad ogni bias nell'epoca corrente
@@ -107,10 +109,10 @@ function [net,TSE, VSE, deltaB, deltaW, trainingDerivB, trainingDerivW] = resili
         % I pesi e i bias sono aggornati secondo quanto stabilito dalla 
         % Resilient back propagation:
             
-            % Se i pesi e i bias hanno derivate concordi, gli scostamenti dell'epoca
-            % precedente vengono incrementati con il valore 'etaPlus'
+            % Se i pesi e i bias hanno derivate concordi, gli scostamenti 
+            % dell'epoca precedente vengono incrementati con il valore 
+            %'etaPlus'
             deltaW{l}(concordanceW > 0) = deltaWPrec{l}(concordanceW > 0) * etaPlus;
-
             deltaB{l}(concordanceB > 0) = deltaBPrec{l}(concordanceB > 0) * etaPlus;
             
             
