@@ -1,13 +1,14 @@
 function[trainingSetData, trainingSetLabels, validationSetData, validationSetLabels, testSetData, testSetLabels] = createSets(trainImages, trainLabels, testImages, testLabels, trainingSetSize, validationSetSize, testSetSize)
 % Questa funzione estrae casualmente dal dataset MNIST una matrice per il
-% training, una per il validation set e una per il test set.
-% Training e Validation set saranno estratti dal file del dataset MNIST
+% training set, una per il validation set e una per il test set.
+% training e validation set saranno estratti dal file del dataset MNIST
 % relativo al training set, mentre il test set sarà estratto dal file
 % relativo al test set.
-% Ognuno dei set contiene valori distinti e la sua dimensione dipende dai parametri
-% forniti in input. Al fine di avere un numero di immagini uguale per ogni
-% classe, le grandezze dei vari set dati in input dovranno essere
-% interi multipli di 10, altrimenti la funzione lancerà un errore.
+% Ognuno dei set contiene valori distinti e la sua dimensione dipende dai
+% parametri forniti in input. Al fine di avere un numero di immagini
+% uniforme per ogni classe, le grandezze dei vari set dati in input 
+% dovranno  essere interi multipli di 10, altrimenti la funzione lancerà 
+% un errore.
 
 % INPUT:
 %   - 'trainImages': Matrice di immagini dal training set di MNIST
@@ -20,8 +21,8 @@ function[trainingSetData, trainingSetLabels, validationSetData, validationSetLab
 %                    ottenuta dalla funzione 'loadMNIST' 
 %   - 'trainingSetSize': Numero di dati da estrarre per il training set.
 %                        Deve essere un numero multiplo di 10
-%   - 'validationSetSize': Numero di dati da estrarre per il validation set.
-%                        Deve essere un numero multiplo di 10
+%   - 'validationSetSize': Numero di dati da estrarre per il validation .
+%                          set. Deve essere un numero multiplo di 10
 %   - 'testSetSize: Numero di dati da estrarre per il test set.
 %                       Deve essere un numero multiplo di 10
 %
@@ -35,11 +36,11 @@ function[trainingSetData, trainingSetLabels, validationSetData, validationSetLab
 %                          tranne un 1 in corrispondenza della label
 %                          relativa all'immagine i-esima di
 %                          trainingSetData)
-%   - 'validationSetData': Matrice di dimensione [validationSetSize]x784 che
-%                          contiene l'insieme di immagini distinte e casuali
-%                          che sono state estratte da trainImages
-%   - 'validationSetlabels': Matrice di dimensione [validationSetSize]x10 che
-%                            rappresenta le labels delle immagini in
+%   - 'validationSetData': Matrice di dimensione [validationSetSize]x784 
+%                          che contiene l'insieme di immagini distinte e 
+%                          casuali che sono state estratte da trainImages
+%   - 'validationSetlabels': Matrice di dimensione [validationSetSize]x10 
+%                            che rappresenta le labels delle immagini in
 %                            'validationSetData'. (La i-esima riga avrà 
 %                            tutti 0 tranne un 1 in corrispondenza della
 %                            label relativa all'immagine i-esima di
@@ -78,7 +79,8 @@ function[trainingSetData, trainingSetLabels, validationSetData, validationSetLab
     % inserite nel training set
     [trainingSetData, trainingSetLabels, indexesTaken, lastPosition] = buildSet(trainImages, trainLabels, trainingSetSize, indexesTaken, lastPosition, totSize);
     
-    % Calcolo la matrice delle immagini e delle labels per il validation set.
+    % Calcolo la matrice delle immagini e delle labels per il validation
+    % set.
     [validationSetData, validationSetLabels] = buildSet(trainImages, trainLabels, validationSetSize, indexesTaken, lastPosition, totSize);
     
     % Ridefinisco l'array indexesTaken per tenere traccia degli indici già
@@ -87,7 +89,7 @@ function[trainingSetData, trainingSetLabels, validationSetData, validationSetLab
     indexesTaken = zeros(1, (testSetSize));
     
     % Conservo l'ultima posizione di indexesTaken dove è stato inserito un
-    % valore
+    % valore.
     lastPosition = 1;
     
         
@@ -126,7 +128,8 @@ function [setData, setLabels, indexesTaken, lastPosition] = buildSet(digits, lab
             % che rappresenta la cifra corrente, e se questa immagine non è
             % già stata inserita in 'setData' allora posso aggiungerla
             if (labels(randomIndex) == currentDigit) && (~ismember(randomIndex, indexesTaken))
-                % Incremento il numero di immagini aggiunte per la cira corrente
+                % Incremento il numero di immagini aggiunte per la cira
+                % corrente
                 digitsCounter(currentDigit+1) = digitsCounter(currentDigit+1) + 1;
                 % Aggiungo la label e l'immagine alle matrici di output
                 setLabels(j, currentDigit+1) = 1;

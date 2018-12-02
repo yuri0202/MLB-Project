@@ -43,7 +43,7 @@ end
 
 function labels = loadMNISTLabels(filename)
 %loadMNISTLabels ritorna un array di dimensione [numero di immagini], che
-%   contiene le labels delle immagini del dataset MNIST
+%contiene le labels delle immagini del dataset MNIST
 fp = fopen(filename, 'rb');
 assert(fp ~= -1, ['Could not open ', filename, '']);
 

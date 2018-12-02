@@ -9,7 +9,8 @@ function [derivativeWeights, derivativeBiases] = backProp(net, input, outputs, A
 %       - 'A': cell array di nodi di input prodotto dalla funzione di 
 %         forward propagation.
 %       - 'target': target per l'input dato.
-%       - 'errorFunction': Funzione da utilizzare per il calcolo dell'errore
+%       - 'errorFunction': Funzione da utilizzare per il calcolo
+%       dell'errore
 %
 %   OUTPUT:
 %       - derivativeWeights: cell array contenente le derivate dei pesi per
@@ -17,16 +18,16 @@ function [derivativeWeights, derivativeBiases] = backProp(net, input, outputs, A
 %       - derivativeBiases: cell array contenente le derivate dei bias per
 %         ogni strato.
     
-    %calcola i delta dei nodi di output
+    % Calcola i delta dei nodi di output
     layer = net.hiddenLayersNum+1;
     delta{layer} = errorFunction(outputs{layer}, target) .* net.derivativeFunctions{layer}(A{layer});
 
-    %calcola i delta rimanenti "all'indietro"
+    % Calcola i delta rimanenti "all'indietro"
     for i=layer-1:-1:1
         delta{i} = net.derivativeFunctions{i}(A{i}) .* (delta{i+1}*net.W{i+1});
     end
     
-    %calcola le derivate
+    % Calcola le derivate
     derivativeWeights{1} = delta{1}' * input;
     derivativeBiases{1} = sum(delta{1});
     
