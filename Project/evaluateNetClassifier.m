@@ -1,5 +1,6 @@
 function [totalAccuracy] = evaluateNetClassifier(output,target)
-% Questa funzione valuta le prestazioni della rete neurale
+% Questa funzione valuta le prestazioni della rete neurale calcolandone
+% l'accuracy
 
 
 

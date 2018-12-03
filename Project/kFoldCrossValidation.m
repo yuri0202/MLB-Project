@@ -9,9 +9,10 @@ function [Performances] = kFoldCrossValidation(trainingSetData, trainingSetLabel
 %   - 'trainingSetSize': Numero di elementi presenti in 'trainingSetData'
 %   - 'foldSize': Numero di elementi per ogni fold (trainingSetSize/K)
 %   - 'meanStdCurrentIndex': Indice che tiene traccia dell'ultimo elemento
-%                            inserito nella matrice meanStdCurrentIndex per
-%                            il calcolo della media e della deviazione
-%                            standard delle performances
+%                            per inserito nella matrice  
+%                            meanStdCurrentIndex il calcolo della media 
+%                            e della deviazione standard delle 
+%                            performances
 % - 'numIterations': Numero totale di iterazioni da effettuare, dato dalla
 %                    moltiplicazione delle cardinalità dell'array di
 %                    possibili valori per etaMinus, etaPlus e Numero di
@@ -64,10 +65,10 @@ function [Performances] = kFoldCrossValidation(trainingSetData, trainingSetLabel
 
         if TsStart > TsEnd
             % Se l'indice di fine set del Training Set è maggiore dell'indice
-            % di inizio set (Esempio[K=10] Training Set = folds 4 5 6 7
-            % 7 9 10 1 2), allora il TS sarà ovviamente composto dagli
-            % elementi che vanno dal fold 4 al fold K e quelli dal
-            % fold 1 al fold 2
+            % performances di inizio set (Esempio[K=10] Training Set = 
+            % folds 4 5 6 7 7 9 10 1 2), allora il TS sarà ovviamente 
+            % composto dagli elementi che vanno dal fold 4 al fold K 
+            % e quelli dal fold 1 al fold 2
             TSData = trainingSetData([TsStart:trainingSetSize,1:TsEnd],:);
             TSLabels = trainingSetLabels([TsStart:trainingSetSize,1:TsEnd],:);
         else
@@ -95,8 +96,8 @@ function [Performances] = kFoldCrossValidation(trainingSetData, trainingSetLabel
         % il test set di questa iterazione di K-Fold
         [output, ~] = forwardProp(net,TeSData, true);
         
-        % Calcolo dell'accuratezza delle risposte della rete, confrontandole con le
-        % label effettive del test set.
+        % Calcolo dell'accuratezza delle risposte della rete, 
+        % confrontandole con le label effettive del test set.
         [totalAccuracy] = evaluateNetClassifier(output{net.hiddenLayersNum+1}, TeSLabels);
         totalAccuracy = totalAccuracy*100;
         Performances(k) = totalAccuracy;

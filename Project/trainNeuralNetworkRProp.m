@@ -93,7 +93,7 @@ function [net,TSErrors, VSErrors] = trainNeuralNetworkRProp(net, trainingSetInpu
         % Salvo la rete prima di effettuare l'aggiornamento
         prevNet = net;
         
-        %Addestramento rete per una epoca -> chiamo funzione
+        % Addestramento rete per una epoca
         [net, TSErrors(epoch), VSErrors(epoch), deltaB, deltaW, derivativeB, derivativeW] = resilientBackPropagation(net, trainingSetInput, trainingSetLabels, validationSetInput, validationSetLabels, errorFunction, errorFunctionDx, etaMinus, etaPlus, epoch, derivativeW, derivativeB, deltaW, deltaB, softmax, printFlag);
        
         

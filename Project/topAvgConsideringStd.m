@@ -1,11 +1,9 @@
 function [bestNumNodes, bestEtaMin,bestEtaPlus ] = topAvgConsideringStd(meanStdPerComb, stdThreshold)
-   
 
     % Ordino la matrice in input per i valori decrescenti della colonna che 
     % rappresenta la media e prendo i primi 'topAvg' elementi
-
     A = sortrows(meanStdPerComb,-4);
-    
+   
     numRows = size(A,1);
     numCols = size(A,2);
     
@@ -17,8 +15,6 @@ function [bestNumNodes, bestEtaMin,bestEtaPlus ] = topAvgConsideringStd(meanStdP
         end     
     end
     
-    
-
     % Restituisco i valori degli hyper parametri corrispondenti alla
     % combinazione migliore
     bestNumNodes = A(returnIndex,1);

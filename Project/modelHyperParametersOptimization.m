@@ -11,8 +11,8 @@ function [meanStdPerComb,bestNumNodes,bestEtaMin,bestEtaPlus] = modelHyperParame
 %                                   iterazioni del K-Fold Cross Validation
 %   - 'trainImages': Matrice di immagini dal training set di MNIST
 %                    (60000x784), ottenuta dalla funzione 'loadMNIST'
-%   - 'trainLabels': Matrice di labels dal training set di MNIST (60000x1),
-%                    ottenuta dalla funzione 'loadMNIST' 
+%   - 'trainLabels': Matrice di labels dal training set di ,
+%                    MNIST (60000x1) ottenuta dalla funzione 'loadMNIST' 
 %   - 'trainingSetSize': Numero di elementi da prendere da trainImages sul
 %                        quale effettuare la K-Fold
 %   - 'epochs': Numero massimo di epoche con cui addestrare la rete
@@ -35,8 +35,8 @@ function [meanStdPerComb,bestNumNodes,bestEtaMin,bestEtaPlus] = modelHyperParame
 %   - 'K': Numero di Fold con cui effettuare la K-Fold
 %   - 'etaMins': Array che contiene i diversi valori di etaMin con le quali
 %                provare le diverse combinazioni
-%   - 'etaPlus': Array che contiene i diversi valori di etaPlus con le quali 
-%                provare le diverse combinazioni
+%   - 'etaPlus': Array che contiene i diversi valori di etaPlus con le  
+%                quali provare le diverse combinazioni
 %   - 'numHiddenNodes': Array che contiene i diversi valori di numero di
 %                       nodi interni con i quali provare le diverse
 %                       combinazioni
@@ -67,10 +67,10 @@ function [meanStdPerComb,bestNumNodes,bestEtaMin,bestEtaPlus] = modelHyperParame
     
 
     
-    % Definisco la matrice che conserva per ogni combinazione di valori degli
-    % iper-parametri, la media e la deviazione standard delle performance 
-    % ottenute tramite k-fold cross validation e l'indice che mi tiene 
-    % traccia dell'ultimo elemento inserito
+    % Definisco la matrice che conserva per ogni combinazione di valori 
+    % degli iper-parametri, la media e la deviazione standard delle 
+    % performance  ottenute tramite k-fold cross validation e l'indice che 
+    % mi tiene  traccia dell'ultimo elemento inserito
     numIterations = size(etaMins,2)*size(etaPlus,2)*size(numHiddenNodes,2);
     meanStdPerComb = zeros(numIterations,5);
     meanStdCurrentIndex = 1;
@@ -90,13 +90,14 @@ function [meanStdPerComb,bestNumNodes,bestEtaMin,bestEtaPlus] = modelHyperParame
                 Performances = kFoldCrossValidation(trainingSetData, trainingSetLabels, trainingSetSize, foldSize, meanStdCurrentIndex, numIterations, K, HIDDEN_NODES, ETA_MINUS, ETA_PLUS, epochs, outputFunction, outputFunctionDx,hiddenFunction,hiddenFunctionDx,supWeights,infWeights,errorFunction,errorFuctionDx,softMax,printFlag);
 
                 % Aggiorno la matrice meanStdPerComb con il valore medio e
-                % la deviazione standard di tutte le performances calcolate
-                % nelle K iterazioni
+                % la deviazione standard di tutte le performances 
+                % calcolate nelle K iterazioni
                 meanStdPerComb(meanStdCurrentIndex,1) = HIDDEN_NODES;
                 meanStdPerComb(meanStdCurrentIndex,2) = ETA_MINUS;
                 meanStdPerComb(meanStdCurrentIndex,3) = ETA_PLUS;
                 meanStdPerComb(meanStdCurrentIndex,4) = mean(Performances);
-                meanStdPerComb(meanStdCurrentIndex,5) = std(Performances,1); % Divido per N e non uso la correzione di Bessel
+                % Divido per N e non uso la correzione di Bessel
+                meanStdPerComb(meanStdCurrentIndex,5) = std(Performances,1); 
                 meanStdCurrentIndex = meanStdCurrentIndex +1;
             end
         end
