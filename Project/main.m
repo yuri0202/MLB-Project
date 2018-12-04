@@ -24,9 +24,9 @@ K = 10;
 SOFTMAX_FLAG = true;
 PRINT_FLAG = false;
 SET_SIZE_FOR_KFOLD = 10000;
-etaMins = [0.4,0.5,0.6];
-etaPlus = [1.1,1.2,1.3];
-numHiddenNodes = [200,400,600,800];
+etaMins = [0.4];
+etaPlus = [1.1];
+numHiddenNodes = [600,800];
 
 % Lancio l'algoritmo per la scelta dei migliori iper-parametri per tramite
 % la tecnica di k-fold cross validation
@@ -34,18 +34,6 @@ tic;
 [meanStdPerComb,bestNumNodes,bestEtaMin,bestEtaPlus] = modelHyperParametersOptimization(@topAvgConsideringStd,trainImages,trainLabels,SET_SIZE_FOR_KFOLD,EPOCHS,OUTPUT_ACTIVATION_FUNCTION, OUTPUT_ACTIVATION_FUNCTION_DX, HIDDEN_ACTIVATION_FUNCTION, HIDDEN_ACTIVATION_FUNCTION_DX, SUP_WEIGHTS, INF_WEIGHTS,ERROR_FUNCTION ,ERROR_FUNCTION_DX,SOFTMAX_FLAG,K,etaMins,etaPlus,numHiddenNodes,PRINT_FLAG);
 fprintf("\nTempo per l'esecuzione della K-Fold Cross Validation: %.0f minuti e %.0f secondi\n", floor(toc/60), (toc) - (floor(toc/60)*60));
 [trainingSetData, trainingSetLabels, validationSetData, validationSetLabels, testSetData, testSetLabels] = createSets(trainImages', trainLabels, testImages', testLabels, TRAINING_SET_SIZE, VALIDATION_SET_SIZE, TEST_SET_SIZE);
-
-%shuffle   = randperm(TRAINING_SET_SIZE);
-%trainingSetData   = trainingSetData(shuffle,:);
-%trainingSetLabels = trainingSetLabels(shuffle,:);
-
-%shuffle2   = randperm(VALIDATION_SET_SIZE);
-%validationSetData   = validationSetData(shuffle2,:);
-%validationSetLabels = validationSetLabels(shuffle2,:);
-
-%shuffle3   = randperm(TEST_SET_SIZE);
-%testSetData   = testSetData(shuffle3,:);
-%testSetLabels = testSetLabels(shuffle3,:);
 
 % Creazione rete
 net = createNeuralNetwork(size(trainingSetData,2), 10, OUTPUT_ACTIVATION_FUNCTION, OUTPUT_ACTIVATION_FUNCTION_DX, [

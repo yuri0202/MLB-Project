@@ -27,18 +27,6 @@ SOFTMAX_FLAG = true;
 PRINT_FLAG = true;
 [trainingSetData, trainingSetLabels, validationSetData, validationSetLabels, testSetData, testSetLabels] = createSets(trainImages', trainLabels, testImages', testLabels, TRAINING_SET_SIZE, VALIDATION_SET_SIZE, TEST_SET_SIZE);
 
-%shuffle   = randperm(TRAINING_SET_SIZE);
-%trainingSetData   = trainingSetData(shuffle,:);
-%trainingSetLabels = trainingSetLabels(shuffle,:);
-
-%shuffle2   = randperm(VALIDATION_SET_SIZE);
-%validationSetData   = validationSetData(shuffle2,:);
-%validationSetLabels = validationSetLabels(shuffle2,:);
-
-%shuffle3   = randperm(TEST_SET_SIZE);
-%testSetData   = testSetData(shuffle3,:);
-%testSetLabels = testSetLabels(shuffle3,:);
-
 % Creazione rete
 net = createNeuralNetwork(size(trainingSetData,2), 10, OUTPUT_ACTIVATION_FUNCTION, OUTPUT_ACTIVATION_FUNCTION_DX, [
     struct('size',HIDDEN_NODES,'function',HIDDEN_ACTIVATION_FUNCTION,'derivative',HIDDEN_ACTIVATION_FUNCTION_DX) % Hidden Layer
