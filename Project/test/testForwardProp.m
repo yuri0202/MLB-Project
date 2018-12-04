@@ -7,16 +7,15 @@ OUTPUT_ACTIVATION_FUNCTION = @identity;
 OUTPUT_ACTIVATION_FUNCTION_DX =@identityDx;
 HIDDEN_ACTIVATION_FUNCTION = @sigmoid;
 HIDDEN_ACTIVATION_FUNCTION_DX = @sigmoidDx;
-INPUT_DIMENSION = 4;
-OUTPUT_DIMENSION = 2;
+INPUT_DIMENSION = 2;
+OUTPUT_DIMENSION = 1;
 % Creo la rete neurale
 net = createNeuralNetwork(INPUT_DIMENSION, OUTPUT_DIMENSION, OUTPUT_ACTIVATION_FUNCTION, OUTPUT_ACTIVATION_FUNCTION_DX, [
-    struct('size',3,'function',HIDDEN_ACTIVATION_FUNCTION,'derivative',HIDDEN_ACTIVATION_FUNCTION_DX) % Hidden Layer1
-    struct('size',2,'function',HIDDEN_ACTIVATION_FUNCTION,'derivative',HIDDEN_ACTIVATION_FUNCTION_DX) % Hidden Layer2
+    struct('size',15,'function',HIDDEN_ACTIVATION_FUNCTION,'derivative',HIDDEN_ACTIVATION_FUNCTION_DX) % Hidden Layer1
 ],INF_WEIGHTS,SUP_WEIGHTS );
 
-
-[outputs, A] = forwardProp(net, [1,2,3,4], false);
+% Eseguo la forward propagation
+[z, A] = forwardProp(net, [1,2;3,4;5,6], false);
 
 
 

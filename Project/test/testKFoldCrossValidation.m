@@ -1,5 +1,4 @@
-% Script per testare la scelta degli iper-parametri tramite K-Fold Cross
-% Validation
+% Main per testare la PARTE B
 clc;
 clear;
 
@@ -21,11 +20,14 @@ ERROR_FUNCTION_DX = @crossEntropyDx;
 K = 10;
 SOFTMAX_FLAG = true;
 PRINT_FLAG = false;
-SET_SIZE_FOR_KFOLD = 5000;
-etaMins = [0.4,0.5];
-etaPlus = [1.1,1.2];
-numHiddenNodes = [100,200];
+SET_SIZE_FOR_KFOLD = 10000;
+etaMins = [0.4,0.5,0.6];
+etaPlus = [1.1,1.2,1.3];
+numHiddenNodes = [200,400,600,800];
+SELECTION_CRITERION_FUNCTION = @topAvgConsideringStd;
 
-% Lancio l'algoritmo per la scelta dei migliori iper-parametri per tramite
-% la tecnica di k-fold cross validation
-meanStdPerComb = modelHyperParametersOptimization(trainImages,trainLabels,SET_SIZE_FOR_KFOLD,EPOCHS,OUTPUT_ACTIVATION_FUNCTION, OUTPUT_ACTIVATION_FUNCTION_DX, HIDDEN_ACTIVATION_FUNCTION, HIDDEN_ACTIVATION_FUNCTION_DX, SUP_WEIGHTS, INF_WEIGHTS,ERROR_FUNCTION ,ERROR_FUNCTION_DX,SOFTMAX_FLAG,K,etaMins,etaPlus,numHiddenNodes,PRINT_FLAG);
+% Lancio l'algoritmo per la scelta dei migliori iper-parametri tramite
+% la tecnica di K-Fold Cross Validation
+tic;
+[meanStdPerComb,bestNumNodes,bestEtaMin,bestEtaPlus] = modelHyperParametersOptimization(SELECTION_CRITERION_FUNCTION,trainImages,trainLabels,SET_SIZE_FOR_KFOLD,EPOCHS,OUTPUT_ACTIVATION_FUNCTION, OUTPUT_ACTIVATION_FUNCTION_DX, HIDDEN_ACTIVATION_FUNCTION, HIDDEN_ACTIVATION_FUNCTION_DX, SUP_WEIGHTS, INF_WEIGHTS,ERROR_FUNCTION ,ERROR_FUNCTION_DX,SOFTMAX_FLAG,K,etaMins,etaPlus,numHiddenNodes,PRINT_FLAG);
+fprintf("\nTempo per l'esecuzione della K-Fold Cross Validation: %.0f minuti e %.0f secondi\n", floor(toc/60), (toc) - (floor(toc/60)*60));
