@@ -23,7 +23,8 @@ function [ outputs, A ] = forwardProp( net, input, softMax )
     for i=1 : net.hiddenLayersNum + 1 
         A{i} = (layerInput * net.W{i}');
         B = repmat(net.b{i},size(layerInput,1),1);
-        outputs{i} = net.outputFunctions{i}(A{i}+B);
+        A{i} = A{i} + B;
+        outputs{i} = net.outputFunctions{i}(A{i});
         %L'output sarà l'input per la prossima propagazione
         layerInput = outputs{i}; 
 
